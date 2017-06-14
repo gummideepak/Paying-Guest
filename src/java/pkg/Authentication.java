@@ -71,7 +71,7 @@ public class Authentication {
        //from,password,to,subject,message 
        Random r = new Random();
        int pin = r.nextInt(10000)+1000;
-     boolean sent = Mailer.send("deepak.sai231254@gmail.com","deepak2354",email,"Paying Guest Email Verification",String.valueOf(pin));  
+     boolean sent = Mailer.send("USERNAME","PASSWORD",email,"Paying Guest Email Verification",String.valueOf(pin));  
      //change from, password and to 
      if(sent){
          PreparedStatement ps;
