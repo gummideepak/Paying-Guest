@@ -1,0 +1,28 @@
+DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="RegisterServlet" method="post">
+        <h1>Registration</h1>
+        Name:<input type="text" name="reg_name"><br><br>
+        Email Id:<input type="email" name="reg_email"><br><br>
+        User Name:<input type="text" name="reg_uname"><br><br>
+        Password:<input type="text" name="reg_password"><br><br>
+        Confirm Password:<input type="text" name="reg_cpassword"><br><br>
+        DOB:<input type="date" name="reg_dob"><br><br>
+        Gender:<input type="radio" name="gender" value="male">Male
+        <input type="radio" name="gender" value="female">Female<br><br>
+        Contact Number:<input type="number" name="contact" min="1000000000" max="9999999999"><br><br>
+        <input type="submit" value="register"><br><br>
+        </form>
+    </body>
+</html>

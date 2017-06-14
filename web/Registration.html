@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="189245487304-3s2jogb0nnavspohju2s46d14pb5njom.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <title>Simple Register Form with AngularJS & Material Design</title>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+
+      <link rel="stylesheet" href="css/registration_style.css">
+
+      <script>
+          function get_action(form) {
+
+var v = grecaptcha.getResponse();
+if(v.length == 0)
+{
+    document.getElementById('error').innerHTML="You can't leave Captcha Code empty";
+    return false;
+}
+ if(v.length != 0)
+ {
+    var x = document.getElementsByName('register');
+    x[0].submit(); // Form submission
+ }
+}
+
+</script>
+<script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        alert('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+        
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+      };
+    </script>
+</head>
+  <body ng-controller="RegisterCtrl" ng-app="myApp">
+ <div class="container">
+   <div id="signup">
+      <div class="signup-screen">
+         <div class="space-bot text-center">
+            <h1>Sign up</h1>
+           <div class="divider"></div>
+         </div>
+           <form class="form-register" method="post" name="register" novalidate action="RegisterServlet">
+	            <div class="input-field col s6">
+              <input id="name" name="reg_name" type="text" class="validate" required>
+              <label for="name">Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="user-name" name="reg_uname" type="text" class="validate" required>
+              <label for="user-name">User Name</label>
+             </div>
+             <div class="input-field col s6">
+              <input id="email" name="reg_email" type="email" name="email" ng-model="email" class="validate" required>
+              <label for="email">Email</label>
+             </div>
+             <p class="alert alert-danger" ng-show="form-register.reg_email.$error.email">Your email is invalid.</p>
+             <div class="input-field col s6">
+               <input id="password" name="reg_password" type="password" name="password" ng-model="password" ng-minlength='6' class="validate" required>
+               <label for="password">Password</label>
+              </div>
+              <p class="alert alert-danger" ng-show="form-register.reg_password.$error.minlength || form.password.$invalid">Your password must be at least 6 characters.</p>
+             <div class="input-field col s6">
+              <input id="date" name="reg_dob" type="text" class="datepicker" required>
+              <label for="date">Date of birth</label>
+            </div>
+              
+Gender
+                 <p>
+      <input class="with-gap" name="reg_gender" type="radio" id="male" value="male" />
+      <label for="male">Male</label>
+    </p>
+                 <p>
+      <input class="with-gap" name="reg_gender" type="radio" id="female"  value="female"/>
+      <label for="female">Female</label>
+    </p>
+             <div class="input-field col s6">
+              <input id="contact" name="reg_contact" type="text" class="validate" required>
+              <label for="contact">Phone Number</label>
+            </div>
+    <div class="g-recaptcha" id="recaptcha" data-sitekey="6LcVFiUUAAAAAKsDFFpnwPVoaBGleTQg8tccdk7s"></div>
+    <div id="error"></div>
+    <!--END-->
+             
+             </form>
+           <div class="space-top text-center">
+                  <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done" onclick="get_action(this)">
+               <i class="material-icons left">done</i> Done
+                  </button> <br><br>OR<br><br>
+               <center>
+               <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+               </center>
+               <!--<button type="button" class="waves-effect waves-light btn cancel">
+               <i class="material-icons left">clear</i>Cancel
+               </button>-->
+               </div>
+          
+           </div>
+        </div>
+    </div>
+
+  <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js'></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="js/registration_index.js"></script>
+
+</body>
+</html>
+
+
+
+
+    

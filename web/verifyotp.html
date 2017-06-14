@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="189245487304-3s2jogb0nnavspohju2s46d14pb5njom.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <title>Simple Register Form with AngularJS & Material Design</title>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+
+      <link rel="stylesheet" href="css/registration_style.css">
+
+      <script>
+          function submitform(form){
+              var username="",otp="";
+              username = document.getElementById('user-name').value;
+              otp = document.getElementById('otp').value;
+              console.log(username);
+              console.log(otp);
+              if(username!="" && otp!=""){
+                  var x = document.getElementsByName('verify');
+                     x[0].submit(); // Form submission
+              }
+              else
+                  alert("Enter the requried feilds!");
+          }
+ 
+
+    </script>
+</head>
+  <body ng-controller="RegisterCtrl" ng-app="myApp">
+ <div class="container">
+   <div id="signup">
+      <div class="signup-screen">
+         <div class="space-bot text-center">
+            <h1>Sign up</h1>
+           <div class="divider"></div>
+         </div>
+           <form class="form-register" method="post" name="verify" novalidate action="VerifyOtpController">
+	            <div class="input-field col s6">
+              <input id="user-name" name="user-name" type="text" class="validate" required>
+              <label for="user-name">User Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="otp" name="otp" type="text" class="validate" required>
+              <label for="otp">OTP</label>
+             </div>
+    <!--END-->
+    
+    
+             </form>
+          <center>
+              <button class="btn waves-effect waves-light" type="button" name="action" onclick="submitform(this)">Submit
+    <i class="material-icons right">send</i>
+  </button>
+          </center>
+          
+           </div>
+        </div>
+    </div>
+
+  <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js'></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="js/registration_index.js"></script>
+
+</body>
+</html>
+
+
+
+
+    
