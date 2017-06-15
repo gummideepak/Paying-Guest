@@ -12,6 +12,10 @@
         <servlet-name>VerifyOtpController</servlet-name>
         <servlet-class>pkg.VerifyOtpController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddRoom</servlet-name>
+        <servlet-class>pkg.AddRoom</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>VerifyOtpController</servlet-name>
         <url-pattern>/VerifyOtpController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRoom</servlet-name>
+        <url-pattern>/AddRoom</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
