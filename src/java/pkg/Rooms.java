@@ -5,9 +5,12 @@
  */
 package pkg;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.servlet.http.HttpServletResponse;
 import static pkg.Authentication.con;
 
 /**
@@ -44,5 +47,25 @@ public class Rooms {
 		e.printStackTrace();
 	}
         return status;   
+    }
+    
+    public void searchByCity(String city,HttpServletResponse response){
+        String query="SELECT * FROM rooms WHERE CITY='"+city+"'";
+        try{
+        //System.out.println("assssssssssssssssssss");
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        PrintWriter out = response.getWriter();
+        if(rs.next()){
+        //System.out.println(rs.getString(1));
+           out.println("<");
+        }
+        else 
+        out.println("NO");
+        }
+        catch(Exception e){
+            System.out.println("Exception in auth");
+            e.printStackTrace();
+        }
     }
 }

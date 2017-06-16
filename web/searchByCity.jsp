@@ -1,10 +1,20 @@
+<%-- 
+    Document   : searchByCity
+    Created on : 16 Jun, 2017, 12:17:28 PM
+    Author     : sit-dt-9
+--%>
+
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <meta name="theme-color" content="#2196F3">
-    <title>Home</title>
+    <title>Search</title>
     <%
         try{
         String x = session.getAttribute("username").toString();
@@ -15,22 +25,6 @@
             //catch that exception and redirect the user to a error page.
             response.sendRedirect("Error.jsp");
         }
-        try{
-        boolean fromProvide =Boolean.parseBoolean(request.getParameter("fromProvide"));
-        if(fromProvide){
-        int status = Integer.parseInt(request.getParameter("status"));
-        if(status>0){
-            out.println("<script>alert('Details Added');</script>");
-        }
-        else{
-        out.println("<script>alert('Failed!Try again later');</script>");
-        }
-       }//outer if
-    }//try
-        catch(Exception e){
-            
-        }
-        
     %>
     <!-- CSS  -->
     <link href="min/plugin-min.css" type="text/css" rel="stylesheet">
@@ -72,77 +66,63 @@
         </div>
     </nav>
 </div>
-
-<!--Hero-->
-<div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-        <h1 class="text_h center header cd-headline letters type">
-            <span>Rent a home</span> 
-            <span class="cd-words-wrapper waiting">
-                <b class="is-visible">at any place</b>
-                <b>at any time </b>
-                <b>from any device</b>
-            </span>
-        </h1>
-    </div>
-</div>
-
-<!--Intro and service-->
-<div id="intro" class="section scrollspy">
-    <div class="container">
-        <div class="row">
-            <div  class="col s12">
-                <h2 class="center header text_h2"> Short-term accommodations online, Welcome to your home away from <span class="span_h2"> <a href="searchBy.jsp" >home.</a>  </span></h2>
-            </div>
-
-            <div  class="col s12 m4 l4">
-                <div class="center promo promo-example">
-                    <i class="mdi-image-flash-on"></i>
-                    <h5 class="promo-caption">Speed Booking</h5>
-                    <p class="light center">Describe about Bookings.</p>
-                </div>
-            </div>
-            <div class="col s12 m4 l4">
-                <div class="center promo promo-example">
-                    <i class="mdi-social-group"></i>
-                    <h5 class="promo-caption">Best User Experience</h5>
-                    <p class="light center">Describe about user experience.</p>
-                </div>
-            </div>
-            <div class="col s12 m4 l4">
-                <div class="center promo promo-example">
-                    <i class="mdi-hardware-desktop-windows"></i>
-                    <h5 class="promo-caption">Full Customer Support </h5>
-                    <p class="light center">Describe about support.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--Work-->
 <div class="section scrollspy" id="work">
     <div class="container">
-        <h2 class="header text_b">Provide </h2>
-        <h2 class="center header text_h2"> Add a <span class="span_h2"> <a href="provide.jsp" >Room</a>  </span></h2>
-        <!--<div class="row">
-            <div class="col s12 m4 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="img/project1.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Project Title <i class="mdi-navigation-more-vert right"></i></span>
-                        <p><a href="#">Project link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Project Title <i class="mdi-navigation-close right"></i></span>
-                        <p>Here is some more information about this project that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-        --> 
-            </div>
+        <h2 class="header text_b">Results </h2>
+        <!--<h2 class="center header text_h2"> Add a <span class="span_h2"> <a href="provide.jsp" >Room</a>  </span></h2> -->
+        <%
+            String g=null,ac=null,wifi=null,food=null;
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/PayingGuest","root","root");
+            String city = request.getParameter("city");
+            String query="SELECT * FROM rooms WHERE CITY='"+city+"'";
+        try{
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        out.println("<div class=\"row\">");
+        while(rs.next()){
+        //System.out.println(rs.getString(11));
+            if(rs.getString(6).equals("f")){
+                g = "Only Females";
+            }
+            else if(rs.getString(6).equals("m")){
+                g = "Only Males";
+            }
+            else
+                 g="Any";
+            if(rs.getString(8).equals("ac")){
+                ac = "Yes";
+            }
+            else
+                 ac="No";
+            wifi=(rs.getString(8).equals("wifi"))?"yes":"no";
+            food=(rs.getString(8).equals("food"))?"yes":"no";
+            
+             out.println("<div class=\"col s12 m4 l4\">");
+                 out.println("<div class=\"card\">");
+                     out.println("<div class=\"card-image waves-effect waves-block waves-light\">");
+                         out.println("<img class=\"activator\" src=\"img/home.jpg\">");
+                     out.println("</div>");
+                     out.println("<div class=\"card-content\">");
+                         out.println("<span class=\"card-title activator grey-text text-darken-4\">"+rs.getString(1)+"<i class=\"mdi-navigation-more-vert right\"></i></span>");
+                         out.println("<p><a href=\"#\">Book</a></p>");
+                     out.println("</div>");
+                     out.println("<div class=\"card-reveal\">");
+                         out.println("<span class=\"card-title grey-text text-darken-4\">Details <i class=\"mdi-navigation-close right\"></i></span>");
+                        out.println("<table><tr><td>Address</td><td>"+rs.getString(2)+"</td></tr><tr><td>Locality</td><td>"+rs.getString(4)+"</td></tr> <tr><td>Maximum People</td><td>"+rs.getString(5)+"</td></tr><tr><td>Gender</td><td>"+g+"</td></tr> <tr><td>Rooms Available</td><td>"+rs.getString(7)+"</td></tr> <tr><td>A/C</td><td>"+ac+"</td></tr> <tr><td>WiFi</td><td>"+wifi+"</td></tr> <tr><td>Food</td><td>"+food+"</td></tr> <tr><td>Cost</td><td>"+rs.getString(11)+"</td></tr></table>");
+                     out.println("</div>");
+                 out.println("</div>");
+             out.println("</div>");
+             
+        }
+        out.println("</div>");
+        }
+        catch(Exception e){
+            System.out.println("Exception in auth");
+            e.printStackTrace();
+        }
+        %>
         </div>
 
 

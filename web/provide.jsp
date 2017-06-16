@@ -125,7 +125,9 @@ Gender Restrictions:
 <p>
       <input type="checkbox" value="food" name="food" id="food"/>
       <label for="food">Food</label>
-    </p>             
+    </p>     
+         <br>
+
 <!--cost-->
             <div class="input-field col s6">
               <input id="cost" type="text" class="validate" name="cost" required>
