@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddRoom</servlet-name>
-        <servlet-class>pkg.AddRoom</servlet-class>
+        <servlet-class>pkg.AddRoomController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>

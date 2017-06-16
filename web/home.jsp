@@ -15,7 +15,13 @@
             //catch that exception and redirect the user to a error page.
             response.sendRedirect("Error.jsp");
         }
-        
+        int status = Integer.parseInt(request.getParameter("status"));
+        if(status>0){
+            out.println("<script>alert('Details Added');</script>");
+        }
+        else{
+        out.println("<script>alert('Failed!Try again later');</script>");
+    }
     %>
     <!-- CSS  -->
     <link href="min/plugin-min.css" type="text/css" rel="stylesheet">

@@ -78,8 +78,8 @@
              <br>
 <!--maximum number of people-->
              <div class="input-field col s12">
-    <select>
-      <option name="maxpeople" value="" disabled selected>Maximum number of people</option>
+    <select name="maxpeople">
+      <option value="" disabled selected>Maximum number of people</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -90,22 +90,22 @@
 <!--genders-->
 Gender Restrictions:
 <p>
-      <input class="with-gap" name="group1" type="radio" value="m" id="male" />
+      <input class="with-gap" name="gender" type="radio" value="m" id="male" />
       <label for="male">Only Males</label>
     </p>
 <p>
-      <input class="with-gap" name="group1" type="radio" value="f" id="female" />
+      <input class="with-gap" name="gender" type="radio" value="f" id="female" />
       <label for="female">Only Females</label>
     </p>
 <p>
-      <input class="with-gap" name="group1" type="radio" id="any" value="a" />
+      <input class="with-gap" name="gender" type="radio" id="any" value="a" />
       <label for="any">Any</label>
     </p>         
              <br>
 <!--maximum number of rooms-->
              <div class="input-field col s12">
-    <select>
-      <option name="rooms" value="" disabled selected>Number of rooms available</option>
+    <select name="rooms">
+      <option value="" disabled selected>Number of rooms available</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -115,18 +115,23 @@ Gender Restrictions:
 <!--Additional Details-->
              Additional Facilities: 
 <p>
-      <input type="checkbox" id="ac" />
+      <input type="checkbox" value="ac" name="ac" id="ac"/>
       <label for="ac">A/C</label>
     </p>
 <p>
-      <input type="checkbox" id="wifi" />
+      <input type="checkbox" value="wifi" name="wifi" id="wifi"/>
       <label for="wifi">WiFi</label>
     </p>
 <p>
-      <input type="checkbox" id="food" />
+      <input type="checkbox" value="food" name="food" id="food"/>
       <label for="food">Food</label>
     </p>             
-    
+<!--cost-->
+            <div class="input-field col s6">
+              <input id="cost" type="text" class="validate" name="cost" required>
+              <label for="cost">Rent per Day</label>
+             </div>
+             <br>   
     
              
              

@@ -7,16 +7,18 @@ package pkg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author sit-dt-9
  */
-public class AddRoom extends HttpServlet {
+public class AddRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,9 +33,32 @@ public class AddRoom extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.println("AddRoom Servelet Called");
+        //out.println("AddRoom Servelet Called");
         Rooms rm = new Rooms();
-        
+        HttpSession se = request.getSession();
+        String username = (String) se.getAttribute("username");
+        String address = request.getParameter("address");
+        String city = request.getParameter("city");
+        String locality = request.getParameter("locality");
+        String maxP = request.getParameter("maxpeople");
+        String gender = request.getParameter("gender");
+        String rooms = request.getParameter("rooms");
+        String ac = request.getParameter("ac");
+        String wifi = request.getParameter("wifi");
+        String food = request.getParameter("food");
+        String cost = request.getParameter("cost");
+        //out.println(username + address + city + locality + maxP + gender + rooms + ac + wifi + food);
+        int status = rm.addRooms(username, address, city, locality, maxP, gender, rooms, ac, wifi, food,cost);
+        if(status>0){
+                
+                response.sendRedirect("home.jsp?status="+status);
+		
+	}
+	else{
+		response.sendRedirect("home.jsp?status="+status);
+                
+	}
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
